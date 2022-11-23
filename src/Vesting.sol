@@ -1,9 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.16;
+pragma solidity 0.8.17;
 import "./Lunam.sol";
 
+interface INFT {
+    function ownerOf(uint256 tokenId) external returns(address);
+}
+
 contract Redeem {
-    struct userinfo {    
+    // whether user has redeemed for each month
+    struct monthinfo {    
         bool m1;
         bool m2;
         bool m3;
@@ -16,14 +21,18 @@ contract Redeem {
         bool m10;
         bool m11;
         bool m12;
+        bool m13;
     }
-    mapping(uint256 => boolinfo) private userinfoNFT;
+
+    // tokenid --> each month data
+    mapping(uint256 => monthinfo) private userinfoNFT;
     uint256 private TGE;
 
     constructor() {
         TGE = block.timestamp;
     }
 
+    // mint tokens 
     function mintTokens(uint256 _tokenId, address _LUNAM) external {
         require(INFT(0x2cdC15b84b1Db584c7df1FEd7cA8fFBe4b05F338).ownerOf(_tokenId) == msg.sender, "You do not have this token");
         uint256 currentEpochTokens = balanceToSend(_tokenId);
@@ -104,6 +113,12 @@ contract Redeem {
         else if (currentmonth > TGE + 11*30 days ) {
             require(!userinfoNFT[_tokenId].m12, "already redeemed");
             userinfoNFT[_tokenId].m12 = true;
+            return monthBalance(_tokenId);
+        }
+
+        else if (currentmonth > TGE + 12*30 days ) {
+            require(!userinfoNFT[_tokenId].m13, "already redeemed");
+            userinfoNFT[_tokenId].m13 = true;
             return monthBalance(_tokenId);
         }
     }
@@ -210,8 +225,5 @@ contract Redeem {
             return 27777.778* 10**18;
         }
     }
-    
-
-
 
 }
