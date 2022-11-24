@@ -40,87 +40,92 @@ contract Redeem {
     }
 
     function balanceToSend(uint256 _tokenId) internal returns(uint256 amount) {
+
         uint256 currentmonth = block.timestamp;
 
         if (currentmonth > TGE ) {
             require(!userinfoNFT[_tokenId].m1, "already redeemed");
-            monthBalance(_tokenId);
             userinfoNFT[_tokenId].m1 = true;
+            amount = amount + monthBalance(_tokenId);
         } 
 
-        else if (currentmonth > TGE + 30 days ) {
+        if (currentmonth > TGE + 30 days ) {
             require(!userinfoNFT[_tokenId].m2, "already redeemed");
             userinfoNFT[_tokenId].m2 = true;
-            return monthBalance(_tokenId);
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 2*30 days ) {
+        if (currentmonth > TGE + 2*30 days ) {
             require(!userinfoNFT[_tokenId].m3, "already redeemed");
             userinfoNFT[_tokenId].m3 = true;
-            return monthBalance(_tokenId);
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 3*30 days ) {
+        if (currentmonth > TGE + 3*30 days ) {
             require(!userinfoNFT[_tokenId].m4, "already redeemed");
             userinfoNFT[_tokenId].m4 = true;
-            return monthBalance(_tokenId);
+            amount = amount + monthBalance(_tokenId);
         }
-        else if (currentmonth > TGE + 4*30 days ) {
+
+        if (currentmonth > TGE + 4*30 days ) {
             require(!userinfoNFT[_tokenId].m5, "already redeemed");
             userinfoNFT[_tokenId].m5 = true;
-            return monthBalance(_tokenId);
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 5*30 days) {
+        if (currentmonth > TGE + 5*30 days) {
             require(!userinfoNFT[_tokenId].m6, "already redeemed");
             userinfoNFT[_tokenId].m6 = true;
-            return monthBalance(_tokenId);
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 6*30 days ) {
+        if (currentmonth > TGE + 6*30 days ) {
             require(!userinfoNFT[_tokenId].m7, "already redeemed");
             userinfoNFT[_tokenId].m7 = true;
-            return monthBalance(_tokenId);
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 7*30 days ) {
+        if (currentmonth > TGE + 7*30 days ) {
             require(!userinfoNFT[_tokenId].m8, "already redeemed");
             userinfoNFT[_tokenId].m8 = true;
-            return monthBalance(_tokenId);
-
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 8*30 days ) {
+        if (currentmonth > TGE + 8*30 days ) {
             require(!userinfoNFT[_tokenId].m9, "already redeemed");
             userinfoNFT[_tokenId].m9 = true;
-            return monthBalance(_tokenId);
-
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 9*30 days ) {
+        if (currentmonth > TGE + 9*30 days ) {
             require(!userinfoNFT[_tokenId].m10, "already redeemed");
             userinfoNFT[_tokenId].m10 = true;
-            return monthBalance(_tokenId);
-
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 10*30 days ) {
+        if (currentmonth > TGE + 10*30 days ) {
             require(!userinfoNFT[_tokenId].m11, "already redeemed");
             userinfoNFT[_tokenId].m11 = true;
-            return monthBalance(_tokenId);
+            amount = amount + monthBalance(_tokenId);
         }
 
-        else if (currentmonth > TGE + 11*30 days ) {
-            require(!userinfoNFT[_tokenId].m12, "already redeemed");
-            userinfoNFT[_tokenId].m12 = true;
-            return monthBalance(_tokenId);
+        if (_tokenId == 1 || _tokenId ==2) {
+
+            if (currentmonth > TGE + 11*30 days ) {
+                require(!userinfoNFT[_tokenId].m12, "already redeemed");
+                userinfoNFT[_tokenId].m12 = true;
+                amount = amount + monthBalance(_tokenId);
+            }
+
+            if (currentmonth > TGE + 12*30 days ) {
+                require(!userinfoNFT[_tokenId].m13, "already redeemed");
+                userinfoNFT[_tokenId].m13 = true;
+                amount = amount + monthBalance(_tokenId);
+            }
+            
         }
 
-        else if (currentmonth > TGE + 12*30 days ) {
-            require(!userinfoNFT[_tokenId].m13, "already redeemed");
-            userinfoNFT[_tokenId].m13 = true;
-            return monthBalance(_tokenId);
-        }
+       
     }
 
     function monthBalance(uint256 _tokenId) internal returns (uint256 monthbal){
